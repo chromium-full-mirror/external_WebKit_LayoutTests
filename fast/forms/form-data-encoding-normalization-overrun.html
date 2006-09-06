@@ -4,8 +4,11 @@
 <title>Charsets and submitting forms</title>
 </head>
 <body>
-<form action="?" name=f>
- <input type=hidden name=q value="&#1105;&#66560;&#119083;çc"><br>
+<p>Test for <a href="http://bugzilla.opendarwin.org/show_bug.cgi?id=10681">bug 10681</a>:
+REGRESSION: Reproducible crash at Wikipedia</p>
+
+<form method="post" action="?" name=f>
+ <input type=hidden name=q value="&#x65;&#x301;"><br>
 </form>
 <script>
 if (window.layoutTestController) {
@@ -16,14 +19,14 @@ if (window.layoutTestController) {
 if (document.URL.substring(0, 4) == "file") {
 
     if (document.URL.indexOf('?') == -1) {
-        document.f.q.value += "\u0327"; // cedilla for 'c'
+        for (i=0; i < 15; ++i) {
+            document.f.q.value += document.f.q.value;
+        }
         document.f.submit();
 
     } else {
-        if (unescape(document.URL.substring(document.URL.indexOf('?')+1, document.URL.length)) == unescape("q=%26%231105%3B%26%2366560%3B%26%23119083%3B%E7%E7"))
-            document.write("<p>Success</p>");
-        else
-            document.write("<p>Failure, query is " + document.URL.substring(document.URL.indexOf('?')+1, document.URL.length) + "</p>");
+        <!-- no crash == success -->
+        document.write("<p>SUCCESS</p>");
         
         if (window.layoutTestController)
             layoutTestController.notifyDone();
