@@ -1,13 +1,14 @@
-// [Name] SVGFEConvolveMatrixElement-dom-order-attr.js
+// [Name] SVGFEConvolveMatrixElement-dom-divisor-prop.js
 // [Expected rendering result] An image with feConvolveMatrix filter - and a series of PASS messages
 
-description("Tests dynamic updates of the 'order' attribute of the SVGFEConvolveMatrixElement object")
+description("Tests dynamic updates of the 'divisor' property of the SVGFEConvolveMatrixElement object")
 createSVGTestCase();
 
 var convolveMatrixElement = createSVGElement("feConvolveMatrix");
 convolveMatrixElement.setAttribute("in", "SourceGraphic");
-convolveMatrixElement.setAttribute("order", "2 2");
-convolveMatrixElement.setAttribute("kernelMatrix", "3 0 3 0");
+convolveMatrixElement.setAttribute("order", "3");
+convolveMatrixElement.setAttribute("kernelMatrix", "3 0 3 0 0 0 3 0 3");
+convolveMatrixElement.setAttribute("divisor", "20");
 
 var filterElement = createSVGElement("filter");
 filterElement.setAttribute("id", "myFilter");
@@ -34,12 +35,11 @@ imageElement.setAttribute("height", "200");
 imageElement.setAttribute("filter", "url(#myFilter)");
 rootSVGElement.appendChild(imageElement);
 
-shouldBeEqualToString("convolveMatrixElement.getAttribute('order')", "2 2");
+shouldBe("convolveMatrixElement.divisor.baseVal", "20");
 
 function executeTest() {
-    convolveMatrixElement.setAttribute("kernelMatrix", "3 0 3 0 0 0 3 0 3");
-    convolveMatrixElement.setAttribute("order", "3 3");
-    shouldBeEqualToString("convolveMatrixElement.getAttribute('order')", "3 3");
+    convolveMatrixElement.divisor.baseVal = 12;
+    shouldBe("convolveMatrixElement.divisor.baseVal", "12");
 
     completeTest();
 }
