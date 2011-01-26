@@ -1,9 +1,10 @@
 <style>
     div.box { -webkit-box-sizing: border; border: solid blue; }
-    div.shorter { height: 54px; }
-    div.taller { height: 72px; }
+    div.shorter { width: 54px; }
+    div.taller { width: 72px; }
 </style>
-<div style="height: 100px; width: 630; -webkit-column-gap: 5px; -webkit-columns: 6;">
+<body style="-webkit-writing-mode:vertical-lr">
+<div style="width: 100px; height: 630px; -webkit-column-gap: 5px; -webkit-columns: 6;">
     <div class="taller box"></div>
     <div class="taller box"></div>
     <div id="break-before" class="shorter box" style="-webkit-column-break-before: always;"></div>
@@ -30,6 +31,6 @@
             log("FAIL: '" + id + "' is at (" + rect.left + ", " + rect.top + ") instead of (" + expectedLeft + " ," + expectedTop + ")");
     }
 
-    testBoxPosition("break-before", 218, 8);
-    testBoxPosition("after-break", 428, 8);
+    testBoxPosition("break-before", 8, 218);
+    testBoxPosition("after-break", 8, 428);
 </script>

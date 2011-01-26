@@ -1,8 +1,8 @@
-<html>
+<html style="-webkit-writing-mode:horizontal-tb;">
 <head>
 <style>
     div.columns {
-        width: 200px;
+        height: 200px;
         -webkit-columns: 2;
         -webkit-column-gap: 0;
         outline: 1px solid blue;
@@ -14,15 +14,15 @@
 
     div.float {
         float: left;
-        width: 50px;
-        margin-top: 5px;
+        height: 50px;
+        -webkit-margin-before: 5px;
         color: silver;
     }
 </style>
 </head>
-<body>
+<body style="-webkit-writing-mode:vertical-rl; width:800px">
 <div id="tests">
-    <div class="columns" style="height: 80px;">
+    <div class="columns" style="width: 80px;">
         one line two lines three lines
         <div class="float" id="f1">
             three line float
@@ -31,7 +31,7 @@
     </div>
     <!-- In this case, the float fits, but then the main content causes the break
          to occur earlier and the float gets split. -->
-    <div class="columns" style="height: 75px;">
+    <div class="columns" style="width: 75px;">
         one line two lines three lines
         <div class="float" id="f2">
             three line float
@@ -39,7 +39,7 @@
         text runs here next to the float
     </div>
     <!-- In this case, the float paginates after its second line. -->
-    <div class="columns" style="height: 70px;">
+    <div class="columns" style="width: 70px;">
         one line two lines three lines
         <div class="float" id="f3">
             three line float
@@ -47,7 +47,7 @@
         text runs here next to the float
     </div>
     <!-- In this case, the float paginates after its first line. -->
-    <div class="columns" style="height: 70px;">
+    <div class="columns" style="width: 70px;">
         one line two lines three lines and some more
         <div class="float" id="f4">
             three line float
@@ -55,7 +55,7 @@
         text runs here next to the float
     </div>
     <!-- In this case, the float paginates after its third line. -->
-    <div class="columns" style="height: 45px;">
+    <div class="columns" style="width: 45px;">
         one line
         <div class="float" id="f5">
             and one five line float
@@ -77,11 +77,11 @@
     }
 
     var tests = [
-        ["f1", 0, 45],
-        ["f2", 0, 45],
-        ["f3", 0, 45],
-        ["f4", 0, 55],
-        ["f5", 0, 15]
+        ["f1", 25, 0],
+        ["f2", 20, 0],
+        ["f3", 15, 0],
+        ["f4", 5, 0],
+        ["f5", 20, 0]
     ];
 
     var test;
@@ -91,8 +91,10 @@
         var result = floatOffset(float);
         var passed = result.width === test[1] && result.height === test[2]
         float.style.color = passed ? "green" : "red";
-        if (!passed)
+        if (!passed) {
             failures++
+            alert(result.width + " " + result.height);
+        }
     }
 
     if (window.layoutTestController) {
