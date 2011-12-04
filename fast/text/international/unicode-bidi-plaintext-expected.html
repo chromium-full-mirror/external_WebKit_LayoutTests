@@ -6,19 +6,20 @@
 <body>
 <div>This tests proper handling of unicode-bidi: plaintext. You should not see any red.</div>
 
-<div style="unicode-bidi: -webkit-plaintext; unicode-bidi: -moz-plaintext; unicode-bidi: plaintext;">
-!hello.
-<br>
+<div dir=ltr>
+!hello.<br>
+<span dir=rtl>
 !שלום.
-<br>
+</span><br>
+<span dir=ltr>
 hello, לוי!
-<br>
-שלום, WebKit!
-</div>
-<pre dir="auto">
+</span><br>
+<span dir=rtl>
+שלום, WebKit!</span><br>
+<pre>
 a
 (
-שלום, WebKit!
+!WebKit ,שלום
 hello, לוי!
 )
 </pre>
