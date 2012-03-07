@@ -1,7 +1,8 @@
 <?php
 
-    $refer = $_SERVER["HTTP_REFERER"];
-    if (!isset($refer) || stripos($refer, "video-referer.html") === false)
+    $ua = $_SERVER["HTTP_USER_AGENT"];
+
+    if (!isset($ua) || stripos($ua, "WebKit/") === false || stripos($ua, "(KHTML, like Gecko)") === false)
         die;
 
     $fileName = $_GET["name"];
