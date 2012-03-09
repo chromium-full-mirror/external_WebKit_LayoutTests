@@ -1,4 +1,4 @@
-Test WebSocket.extensions attribute.
+Test WebSocket.extensions attribute with no extension support in server side.
 
 On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE".
 
@@ -7,7 +7,7 @@ PASS ws.extensions is ""
 Check if the value is read only:
 PASS ws.extensions = 'foo'; ws.extensions is ""
 Check the value after the connection is established:
-PASS ws.extensions is "x-webkit-deflate-frame"
+PASS ws.extensions is ""
 PASS successfullyParsed is true
 
 TEST COMPLETE
