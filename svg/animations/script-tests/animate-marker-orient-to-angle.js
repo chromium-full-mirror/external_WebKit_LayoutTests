@@ -1,48 +1,49 @@
-description("Tests SVGAngle animation from deg to rad.");
+description("Animate SVGMarkerElement orientAttr to an angle");
 createSVGTestCase();
 
 // Setup test document
-var defs = createSVGElement("defs");
 
 var marker = createSVGElement("marker");
 marker.setAttribute("id", "marker");
 marker.setAttribute("viewBox", "0 0 10 10");
-marker.setAttribute("markerWidth", "4");
-marker.setAttribute("markerHeight", "3");
-marker.setAttribute("markerUnits", "strokeWidth");
-marker.setAttribute("refX", "1");
+marker.setAttribute("markerWidth", "2");
+marker.setAttribute("markerHeight", "2");
+marker.setAttribute("refX", "5");
 marker.setAttribute("refY", "5");
-marker.setAttribute("orient", "0deg");
-defs.appendChild(marker);
+marker.setAttribute("markerUnits", "strokeWidth");
 
-var polyline = createSVGElement("polyline");
-polyline.setAttribute("id", "polyline");
-polyline.setAttribute("points", "0,0 10,5 0,10 1,5");
-polyline.setAttribute("fill", "green");
-marker.appendChild(polyline);
+var markerPath = createSVGElement("path");
+markerPath.setAttribute("fill", "blue");
+markerPath.setAttribute("d", "M 5 0 L 10 10 L 0 10 Z");
+marker.appendChild(markerPath);
+
+var defsElement = createSVGElement("defs");
+defsElement.appendChild(marker);
+rootSVGElement.appendChild(defsElement);
 
 var path = createSVGElement("path");
 path.setAttribute("id", "path");
-path.setAttribute("d", "M45,50 L55,50");
-path.setAttribute("stroke-width","10");
-path.setAttribute("stroke", "green");
-path.setAttribute("marker-end", "url(#marker)");
 path.setAttribute("onclick", "executeTest()");
-
-var animate = createSVGElement("animate");
-animate.setAttribute("id", "animation");
-animate.setAttribute("attributeName", "orient");
-animate.setAttribute("begin", "path.click");
-animate.setAttribute("dur", "4s");
-animate.setAttribute("from", "0deg");
-animate.setAttribute("to", "3.14159265rad");
-marker.appendChild(animate);
-rootSVGElement.appendChild(defs);
+path.setAttribute("fill", "none");
+path.setAttribute("stroke", "green");
+path.setAttribute("stroke-width", "10");
+path.setAttribute("marker-start", "url(#marker)");
+path.setAttribute("marker-end", "url(#marker)");
+path.setAttribute("d", "M 130 135 L 180 135 L 180 185");
+path.setAttribute("transform", "translate(-130, -120)");
 rootSVGElement.appendChild(path);
+
+var animate1 = createSVGElement("animate");
+animate1.setAttribute("id", "animation");
+animate1.setAttribute("attributeName", "orient");
+animate1.setAttribute("begin", "path.click");
+animate1.setAttribute("dur", "4s");
+animate1.setAttribute("to", "180deg");
+animate1.setAttribute("fill", "freeze");
+marker.appendChild(animate1);
 
 // Setup animation test
 function sample1() {
-    // Check initial/end conditions
     shouldBeCloseEnough("marker.orientAngle.animVal.value", "0");
     shouldBe("marker.orientAngle.baseVal.value", "0");
 
@@ -72,7 +73,7 @@ function executeTest() {
         ["animation", 0.0,   sample1],
         ["animation", 2.0,   sample2],
         ["animation", 3.999, sample3],
-        ["animation", 4.001, sample1]
+        ["animation", 4.001, sample3]
     ];
 
     runAnimationTest(expectedValues);
