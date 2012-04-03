@@ -1,6 +1,6 @@
 SVG 1.1 dynamic animation tests
 
-Tests SVGAngle animation from deg to grad.
+Animate SVGMarkerElement orientAttr from an angle to an angle
 
 On success, you will see a series of "PASS" messages, followed by "TEST COMPLETE".
 
@@ -13,11 +13,15 @@ PASS marker.orientAngle.animVal.value is 90
 PASS marker.orientAngle.baseVal.value is 0
 PASS marker.orientType.animVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
 PASS marker.orientType.baseVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
+PASS marker.orientAngle.animVal.value is 135
+PASS marker.orientAngle.baseVal.value is 0
+PASS marker.orientType.animVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
+PASS marker.orientType.baseVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
 PASS marker.orientAngle.animVal.value is 180
 PASS marker.orientAngle.baseVal.value is 0
 PASS marker.orientType.animVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
 PASS marker.orientType.baseVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
-PASS marker.orientAngle.animVal.value is 0
+PASS marker.orientAngle.animVal.value is 180
 PASS marker.orientAngle.baseVal.value is 0
 PASS marker.orientType.animVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
 PASS marker.orientType.baseVal is SVGMarkerElement.SVG_MARKER_ORIENT_ANGLE
