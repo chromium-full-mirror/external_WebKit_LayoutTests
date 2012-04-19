@@ -1,5 +1,5 @@
 description(
-"This tests that int8 arrays work in the DFG."
+"This tests that uint8 arrays work in the DFG."
 );
 
 function getter1(a, b) {
@@ -79,8 +79,8 @@ function safeSetter(a, b, c) {
 }
 
 for (var si = 0; si < setters.length; ++si) {
-    var array = new Int8Array(101);
-    var checkArray = new Int8Array(101);
+    var array = new Uint8Array(101);
+    var checkArray = new Uint8Array(101);
     var indexOffset = 0;
     var valueOffset = 0;
     
@@ -111,7 +111,7 @@ for (var si = 0; si < setters.length; ++si) {
 }
 
 for (var gi = 0; gi < getters.length; ++gi) {
-    var array = new Int8Array(101);
+    var array = new Uint8Array(101);
     var indexOffset = 0;
     var valueOffset = 0;
     
